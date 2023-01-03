@@ -63,9 +63,8 @@ int GridWorld::Step(actions action)
 		reward += tpr;
 		terminal = true;
 	}
-	grid[currentState[0]][currentState[1]] = 0;
+
 	currentState = newState;
-	grid[currentState[0]][currentState[1]] = 1000;
 	return 0;
 }
 
@@ -74,16 +73,16 @@ std::vector<int> GridWorld::getActionCoordinates(actions action)
 	std::vector<int> actionCoordinate;
 	switch (action) {
 	case left:
-		actionCoordinate = { 0, -1 };
-		break;
-	case up:
 		actionCoordinate = { -1, 0 };
 		break;
-	case right:
+	case up:
 		actionCoordinate = { 0, 1 };
 		break;
-	case down:
+	case right:
 		actionCoordinate = { 1, 0 };
+		break;
+	case down:
+		actionCoordinate = { 0, -1 };
 		break;
 	default:
 		actionCoordinate = { 0, 0 };

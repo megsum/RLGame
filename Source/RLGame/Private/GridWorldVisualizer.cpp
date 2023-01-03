@@ -38,7 +38,7 @@ void UGridWorldVisualizer::TickComponent(float DeltaTime, ELevelTick TickType, F
         }
         s += "\n";
         if (i < grid.size() - 1) {
-            s += ", ";
+            s += "  ";
         }
     }
     gridWorld.Step(gridWorld.left);
