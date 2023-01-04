@@ -10,6 +10,12 @@ UGridWorldVisualizer::UGridWorldVisualizer()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
     PrimaryComponentTick.TickInterval = 5;
+
+    numEpisodes = 1;
+    learningRate = 0.1;
+    currentRewardSum = 0;
+    episodeNum = 1;
+
 }
 
 
@@ -42,8 +48,31 @@ void UGridWorldVisualizer::TickComponent(float DeltaTime, ELevelTick TickType, F
         }
     }
 
-    GridWorld::actions action = GridWorld::actions(rand()%3);
-    
+    if (episodeNum < numEpisodes)
+    {
+        // Get current state, action values and action
+        auto currentState = gridWorld.currentState;
+        auto currentActionValues = qLearningAgent.getActionValues(currentState);
+        auto currentAction = qLearningAgent.greedy_policy(currentActionValues);
+
+        // Step the grid world
+        auto newState = gridWorld.Step(GridWorld::actions(currentAction));
+
+        currentRewardSum += gridWorld.totalReward;
+
+        qLearningAgent.update(currentState, currentAction, newState, gridWorld.totalReward);
+
+        // TODO: Reset the level for next episode
+        if (gridWorld.terminal)
+        {
+            // End run
+            // Reset level
+            episodeNum += 1;
+        }
+    }
+
+    GridWorld::actions action = GridWorld::actions(rand() % 3);
+
     FString actionString = "";
     switch (action)
     {

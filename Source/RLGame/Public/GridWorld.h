@@ -51,9 +51,10 @@ public:
 	int rps; // Reward per step
 	int tpr; // Positive terminal reward
 	int tnr; // Negative terminal reward
+	int totalReward;
 
 	// Get the next state based off the action taken
-	int Step(actions action);
+	 std::vector<int> Step(actions action);
 
 	std::vector<int> getActionCoordinates(actions action);
 

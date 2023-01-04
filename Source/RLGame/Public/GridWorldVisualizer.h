@@ -20,6 +20,12 @@ public:
 	GridWorld gridWorld = GridWorld(5, 5, 2, 2, grid, -1, 100, -100);
 
 	float learningRate;
+	int numEpisodes;
+	std::vector<int> rewardPerEpisode;
+	int currentRewardSum;
+	int episodeNum;
+
+	QLearningAgent qLearningAgent = QLearningAgent(4, 1, learningRate);
 
 protected:
 	// Called when the game starts

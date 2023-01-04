@@ -12,9 +12,11 @@ GridWorld::GridWorld(int xbounds, int ybounds, int xstart, int ystart, std::vect
 	this->grid = grid;
 
 	// State rewards
-	this->rps;
-	this->tpr;
-	this->tnr;
+	this->rps = rps;
+	this->tpr = tpr;
+	this->tnr = tnr;
+
+	totalReward = 0;
 
 	mapBounds = { xbounds, ybounds };
 	startLocation = { xstart, ystart };
@@ -28,7 +30,7 @@ GridWorld::~GridWorld()
 {
 }
 
-int GridWorld::Step(actions action)
+std::vector<int> GridWorld::Step(actions action)
 {
 	std::vector<int> newState = { 0,0 };
 
@@ -63,10 +65,12 @@ int GridWorld::Step(actions action)
 		reward += tpr;
 		terminal = true;
 	}
+
 	grid[currentState[0]][currentState[1]] = 0;
 	currentState = newState;
 	grid[currentState[0]][currentState[1]] = 1000;
-	return 0;
+
+	return currentState;
 }
 
 std::vector<int> GridWorld::getActionCoordinates(actions action)

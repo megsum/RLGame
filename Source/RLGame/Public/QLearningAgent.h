@@ -11,7 +11,7 @@ class RLGAME_API QLearningAgent
 {
 public:
     /* Constructor */
-    QLearningAgent(std::vector<std::vector<std::vector<int>>> approxActionValue, int numActions, float gamma, float lr);
+    QLearningAgent(int numActions, float gamma, float lr);
 
     /* Destructor */
     ~QLearningAgent();
@@ -25,7 +25,7 @@ public:
 
     std::vector<int> getActionValues(std::vector<int> state);
 
-    void update(std::vector<int>, int a, std::vector<int> ns, int r);
+    void update(std::vector<int> s, int a, std::vector<int> ns, int r);
 
 
 };

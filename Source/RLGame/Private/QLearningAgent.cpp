@@ -8,9 +8,8 @@
 
 
 /* Constructor */
-QLearningAgent::QLearningAgent(std::vector<std::vector<std::vector<int>>> approxActionValue, int numActions, float gamma, float lr) 
+QLearningAgent::QLearningAgent(int numActions, float gamma, float lr) 
 {
-    this->approxActionValue = approxActionValue;
     this->numActions = numActions;
     this->gamma = gamma;
     this->lr = lr;
