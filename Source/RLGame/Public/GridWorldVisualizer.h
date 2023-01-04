@@ -5,8 +5,8 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "GridWorld.h"
+#include "QLearningAgent.h"
 #include "GridWorldVisualizer.generated.h"
-
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class RLGAME_API UGridWorldVisualizer : public UActorComponent
@@ -18,6 +18,8 @@ public:
 	UGridWorldVisualizer();
 	std::vector<std::vector<int>> grid = { {0,-1,0,0,0}, {0,0,0,0,0}, {0,0,0,0,0}, {0,0,1,0,0}, {0,0,0,0,-1} };
 	GridWorld gridWorld = GridWorld(5, 5, 2, 2, grid, -1, 100, -100);
+
+	float learningRate;
 
 protected:
 	// Called when the game starts

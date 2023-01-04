@@ -41,7 +41,29 @@ void UGridWorldVisualizer::TickComponent(float DeltaTime, ELevelTick TickType, F
             s += "  ";
         }
     }
-    gridWorld.Step(gridWorld.left);
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, s);
+
+    GridWorld::actions action = GridWorld::actions(rand()%3);
+    
+    FString actionString = "";
+    switch (action)
+    {
+    case GridWorld::left:
+        actionString = "left";
+        break;
+    case GridWorld::right:
+        actionString = "right";
+        break;
+    case GridWorld::up:
+        actionString = "up";
+        break;
+    default:
+        actionString = "down";
+        break;
+    }
+
+    gridWorld.Step(action);
+    GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, ("Moving: %s ", actionString));
+    GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, s);
+
 }
 
