@@ -27,6 +27,8 @@ public:
 
 	QLearningAgent qLearningAgent = QLearningAgent(4, 1, learningRate);
 
+	void MovePlayerToLocation(std::vector<int>);
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
