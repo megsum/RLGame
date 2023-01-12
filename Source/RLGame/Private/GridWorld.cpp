@@ -22,7 +22,7 @@ GridWorld::GridWorld(int xbounds, int ybounds, int xstart, int ystart, std::vect
 	startLocation = { xstart, ystart };
 	currentState = startLocation;
 
-	this->grid[currentState[0]][currentState[1]] = 1000;
+	this->grid[currentState[0]][currentState[1]] = 5;
 	terminal = false;
 }
 
@@ -68,7 +68,7 @@ std::vector<int> GridWorld::Step(actions action)
 
 	grid[currentState[0]][currentState[1]] = 0;
 	currentState = newState;
-	grid[currentState[0]][currentState[1]] = 1000;
+	grid[currentState[0]][currentState[1]] = 5;
 
 	return currentState;
 }

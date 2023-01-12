@@ -25,7 +25,7 @@ public:
 	int currentRewardSum;
 	int episodeNum;
 
-	QLearningAgent qLearningAgent = QLearningAgent(4, 1, learningRate);
+	QLearningAgent qLearningAgent = QLearningAgent(4, 1, learningRate, 5, 5);
 
 	void MovePlayerToLocation(std::vector<int>);
 
