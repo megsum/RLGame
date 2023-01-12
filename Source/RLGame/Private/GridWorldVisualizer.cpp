@@ -12,7 +12,7 @@ UGridWorldVisualizer::UGridWorldVisualizer()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-    PrimaryComponentTick.TickInterval = 5;
+    PrimaryComponentTick.TickInterval = 0.5;
 
     numEpisodes = 5;
     learningRate = 0.1;
@@ -22,9 +22,9 @@ UGridWorldVisualizer::UGridWorldVisualizer()
 }
 
 
-void UGridWorldVisualizer::MovePlayerToLocation(std::vector<int>)
+void UGridWorldVisualizer::MovePlayerToLocation(std::vector<int> state)
 {
-    
+    CurrentLocation = FVector{ state[0] * 100.0, state[1] * 100.0, 0.0 };
 }
 
 // Called when the game starts
@@ -32,7 +32,7 @@ void UGridWorldVisualizer::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+    CurrentLocation = FVector{ gridWorld.xstart * 100.0, gridWorld.ystart * 100.0, 0.0 };
 	
 }
 
@@ -58,7 +58,7 @@ void UGridWorldVisualizer::TickComponent(float DeltaTime, ELevelTick TickType, F
         auto action = qLearningAgent.update(currentState, currentAction, newState, gridWorld.totalReward);
 
         // Need to set this up to move the player with the grid world in game
-        // MovePlayerToLocation(newState);
+        MovePlayerToLocation(newState);
 
         // TODO: Reset the level for next episode
         if (gridWorld.terminal)
@@ -106,8 +106,8 @@ void UGridWorldVisualizer::TickComponent(float DeltaTime, ELevelTick TickType, F
             break;
         }
 
-        GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, ("Moving: %s ", actionString));
-        GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, s);
+        //GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, ("Moving: %s ", actionString));
+        //GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, s);
     }
 }
 
