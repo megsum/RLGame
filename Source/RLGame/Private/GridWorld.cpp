@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Megan Sumner. All rights reserved.
 
 
 #include "GridWorld.h"
@@ -54,6 +54,7 @@ std::vector<int> GridWorld::Step(actions action)
 	}
 	auto reward = rps;
 
+
 	// Add the grid reward for the new state to the total reward if we have hit a terminal state
 	if (grid[newState[0]][newState[1]] == -1)
 	{
@@ -61,6 +62,10 @@ std::vector<int> GridWorld::Step(actions action)
 		terminal = true;
 	}
 	else if(grid[newState[0]][newState[1]] == 1)
+	{
+		reward += 1;
+	}
+	else if (grid[newState[0]][newState[1]] == 2)
 	{
 		reward += tpr;
 		terminal = true;
