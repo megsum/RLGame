@@ -18,9 +18,7 @@ UGridWorldVisualizer::UGridWorldVisualizer()
     learningRate = 0.1;
     currentRewardSum = 0;
     episodeNum = 1;
-
 }
-
 
 void UGridWorldVisualizer::MovePlayerToLocation(std::vector<int> state)
 {
@@ -36,14 +34,30 @@ void UGridWorldVisualizer::BeginPlay()
 	
 }
 
+void UGridWorldVisualizer::GenerateGrid(TArray<int> UnrealGrid)
+{
+
+    std::vector<int> gridRow;
+    for (int i = 0; i < UnrealGrid.Num(); i++)
+    {
+        gridRow.push_back(UnrealGrid[i]);
+        if (i % RowWidth == 0)
+        {
+            grid.push_back(gridRow);
+            gridRow = {};
+        }
+    }
+    gridWorld.grid = grid;
+    gridGenerated = true;
+}
+
 // Called every frame
 void UGridWorldVisualizer::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
     // For debug, convert the array into a string and print it to the screen each tick
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-
-    if (episodeNum < numEpisodes)
+    if (episodeNum < numEpisodes && gridGenerated)
     {
         // Get current state, action values and action
         std::vector<int> currentState = gridWorld.currentState;

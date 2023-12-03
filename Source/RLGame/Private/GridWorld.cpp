@@ -22,7 +22,7 @@ GridWorld::GridWorld(int xbounds, int ybounds, int xstart, int ystart, std::vect
 	startLocation = { xstart, ystart };
 	currentState = startLocation;
 
-	this->grid[currentState[0]][currentState[1]] = 5;
+	//this->grid[currentState[0]][currentState[1]] = 5;
 	terminal = false;
 }
 
